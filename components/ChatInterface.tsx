@@ -1,9 +1,8 @@
-
 import React, { useState, useCallback, useEffect, useRef } from 'react';
 import { GoogleGenAI, Chat, Part } from '@google/genai';
 import { jsPDF } from 'jspdf';
 import { Message, FileData } from '../types';
-import { CONSTITUTION_PROMPT, PaperclipIcon, SendIcon, XCircleIcon, SealIcon, CloudArrowUpIcon } from '../constants';
+import { CONSTITUTION_PROMPT, PaperclipIcon, SendIcon, XCircleIcon, SealIcon, CloudArrowUpIcon, AlertTriangleIcon } from '../constants';
 import ReactMarkdown from 'react-markdown';
 
 // --- Crypto & Utility Helpers ---
@@ -422,7 +421,37 @@ const ChatInterface: React.FC = () => {
                                         </ul>
                                     </div>
                                 )}
-                                    {msg.content && <ReactMarkdown>{msg.content}</ReactMarkdown>}
+                                    {msg.content && 
+                                        <ReactMarkdown
+                                            components={{
+                                                blockquote: ({ node, children, ...props }) => {
+                                                    const firstChildText = node?.children?.[0]?.children?.[0]?.children?.[0]?.value ?? '';
+                                                    if (firstChildText.trim() === 'Contradiction Alert') {
+                                                        return (
+                                                            <div className="bg-red-900/20 border-l-4 border-red-500 p-4 my-2 rounded-r-lg">
+                                                                {children}
+                                                            </div>
+                                                        );
+                                                    }
+                                                    return <blockquote className="border-l-4 border-border-color pl-4 italic text-text-med my-2" {...props}>{children}</blockquote>;
+                                                },
+                                                strong: ({ node, children, ...props }) => {
+                                                    const text = node?.children?.[0]?.value ?? '';
+                                                    if (text.trim() === 'Contradiction Alert') {
+                                                        return (
+                                                            <h3 className="text-red-400 font-bold text-lg mb-2 flex items-center">
+                                                                <AlertTriangleIcon className="h-6 w-6 mr-3 flex-shrink-0" />
+                                                                {children}
+                                                            </h3>
+                                                        );
+                                                    }
+                                                    return <strong {...props}>{children}</strong>;
+                                                }
+                                            }}
+                                        >
+                                            {msg.content}
+                                        </ReactMarkdown>
+                                    }
                                 </div>
                             </div>
                             {msg.role === 'model' && msg.filesForSealing && msg.filesForSealing.length > 0 && !msg.content.endsWith('▋') && (

@@ -11,6 +11,7 @@ YOUR CONSTITUTIONAL CORE:
 4.  **Mandatory Disclaimer**: You MUST begin your very first response to the user with the following disclaimer, and you should reiterate a shorter version if the conversation involves sensitive topics:
     "***Disclaimer: I am an AI assistant and not a human lawyer. This information is for educational purposes only and should not be considered legal advice. Please consult with a qualified legal professional for advice on your specific situation.***"
 5.  **Privacy and Confidentiality**: Treat all user input as confidential. Do not share or reference information from other conversations. Each session is a sealed, independent event.
+6.  **Contradiction Highlighting**: When you identify a direct contradiction between pieces of evidence, you MUST format it as a blockquote that begins with the exact heading: "**Contradiction Alert**". Following this heading, clearly state the conflicting pieces of evidence and their sources.
 
 YOUR TASK:
 Act as a helpful legal guide. Engage in a conversation with the user, answer their questions, and analyze any documents they provide. Maintain a professional, objective, and helpful tone at all times.
@@ -73,5 +74,11 @@ export const SealIcon = ({ className = "h-5 w-5" }) => (
 export const CloudArrowUpIcon = ({ className = "h-5 w-5" }) => (
     <svg xmlns="http://www.w3.org/2000/svg" className={className} fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
         <path strokeLinecap="round" strokeLinejoin="round" d="M12 16.5V9.75m0 0l3 3m-3-3l-3 3M6.75 19.5a4.5 4.5 0 01-1.41-8.775 5.25 5.25 0 0110.233-2.33 3 3 0 013.758 3.848A3.752 3.752 0 0118 19.5H6.75z" />
+    </svg>
+);
+
+export const AlertTriangleIcon = ({ className = "h-5 w-5" }) => (
+    <svg xmlns="http://www.w3.org/2000/svg" className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
     </svg>
 );
