@@ -1,0 +1,8 @@
+{
+  "name": "Verum Omnis: Forensic AI",
+  "description": "A web application that acts as a forensic AI expert witness. Upload evidence files, and the Verum Omnis system will perform a detailed analysis based on its constitutional principles, generating a court-ready report using the Gemini API.",
+  "requestFramePermissions": [
+    "geolocation",
+    "microphone"
+  ]
+}
